@@ -4,6 +4,10 @@ name: Reusable Build and Push to ECR
 on:
   workflow_call:
     inputs:
+      aws-region:
+        description: 'Región de AWS'
+        required: true
+        type: string
       ecr-repository:
         description: 'Nombre del repositorio ECR'
         required: true
@@ -26,7 +30,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ vars.AWS_REGION }}
+          aws-region: ${{ inputs.aws-region }}
 
       - name: 3. Iniciar sesión en Amazon ECR
         id: login-ecr

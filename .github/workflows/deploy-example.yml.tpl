@@ -14,5 +14,7 @@ jobs:
     # IMPORTANTE: Reemplaza con el nombre de tu repo y ruta a utilizar
     uses: Leiva07/urb-workflows/.github/workflows/node-docker-pipeline.yml@main
     with:
+      aws-region: ${{ vars.AWS_REGION }}
       ecr-repository: 'urbana'
       # image-tag: ${{ github.sha }} # Usa el ID del commit como etiqueta única, default: latest
+    secrets: inherit
