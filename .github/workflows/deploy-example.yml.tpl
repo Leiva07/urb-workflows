@@ -1,14 +1,18 @@
 name: Deploy Node App
+run-name: 🚀 Hello!, we're deploying the ${{ github.event.pull_request.user.login }}'s changes
 
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches:
-      - main # Se ejecuta cuando hay cambios en la rama principal
+      - main
 
 jobs:
   call-central-workflow:
-    # IMPORTANTE: Reemplaza 'tu-usuario/central-workflows' con el nombre real de tu repo y ruta
-    uses: tu-usuario/central-workflows/.github/workflows/build-and-push-ecr.yml@main
+    # Solo ejecuta el workflow si el pull request ha sido cerrado y fusionado
+    if: github.event.pull_request.merged == true
+    # IMPORTANTE: Reemplaza con el nombre de tu repo y ruta a utilizar
+    uses: Leiva07/urb-workflows/.github/workflows/node-docker-pipeline.yml@main
     with:
-      ecr-repository: 'mi-app-renta-autos'
-      image-tag: ${{ github.sha }} # Usa el ID del commit como etiqueta única
+      ecr-repository: 'urbana'
+      # image-tag: ${{ github.sha }} # Usa el ID del commit como etiqueta única, default: latest
