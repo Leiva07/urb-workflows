@@ -17,4 +17,6 @@ jobs:
       aws-region: ${{ vars.AWS_REGION }}
       ecr-repository: 'urbana'
       # image-tag: ${{ github.sha }} # Usa el ID del commit como etiqueta única, default: latest
+      ecs-cluster: 'urbana-cluster' # <--- Agrega el nombre de tu Clúster ECS
+      ecs-service: 'urbana' # <--- Agrega el nombre de tu Servicio ECS
     secrets: inherit
